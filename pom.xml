@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<parent>
+    <groupId>io.radanalytics</groupId>
+    <artifactId>operator-parent-pom</artifactId>
+    <version>0.3.7</version>
+</parent>
+<modelVersion>4.0.0</modelVersion>
+<groupId>Empty_Folder</groupId>
+<artifactId>Empty_Folder</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <abstract-operator.version>0.3.5</abstract-operator.version>
+    <!-- Java and test-related versions -->
+    <java.version>11</java.version>
+    <testng.version>7.8.0</testng.version>
+    <selenium.version>4.11.0</selenium.version>
+    <webdrivermanager.version>5.3.2</webdrivermanager.version>
+    <!-- Surefire plugin version -->
+    <maven.surefire.plugin.version>3.0.0-M8</maven.surefire.plugin.version>
+    <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+</properties>
+
+<dependencies>
+    <dependency>
+        <groupId>io.radanalytics</groupId>
+        <artifactId>abstract-operator</artifactId>
+        <version>${abstract-operator.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- TestNG for testing -->
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>${testng.version}</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Selenium for browser automation -->
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>${selenium.version}</version>
+    </dependency>
+
+    <!-- WebDriverManager to manage browser drivers automatically -->
+    <dependency>
+        <groupId>io.github.bonigarcia</groupId>
+        <artifactId>webdrivermanager</artifactId>
+        <version>${webdrivermanager.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>com.trackase</groupId>
+    	<artifactId>TrackaseAutomation</artifactId>
+    	<version>1.0.0</version>
+    </dependency>
+    <dependency>
+    	<groupId>Crif</groupId>
+    	<artifactId>MasterData</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+
+<build>
+    <plugins>
+        <!-- Compiler plugin to set Java version -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${maven.compiler.plugin.version}</version>
+            <configuration>
+                <source>${java.version}</source>
+                <target>${java.version}</target>
+                <encoding>${project.build.sourceEncoding}</encoding>
+            </configuration>
+        </plugin>
+
+        <!-- Surefire plugin configured for TestNG -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven.surefire.plugin.version}</version>
+            <configuration>
+                <!-- If you use a testng.xml in the project root, uncomment and adjust the following:
+                <suiteXmlFiles>
+                    <suiteXmlFile>testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                -->
+                <includes>
+                    <include>**/*Test.java</include>
+                    <include>**/*Tests.java</include>
+                    <include>**/*TestNG.java</include>
+                </includes>
+                <forkCount>1</forkCount>
+                <reuseForks>true</reuseForks>
+            </configuration>
+        </plugin>
+
+        <!-- keep existing plugins -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+        </plugin>
+        <plugin>
+            <groupId>org.jsonschema2pojo</groupId>
+            <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+</project>

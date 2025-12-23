@@ -1,0 +1,45 @@
+# for creating these resources it requires the user to be logged in as system admin
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: Empty_Folder
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: Empty_Folder-edit-resources
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: ""
+subjects:
+  - kind: ServiceAccount
+    name: Empty_Folder
+    namespace: myproject
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: Empty_Folder
+  labels: &default-labels
+    app.kubernetes.io/name: Empty_Folder
+    app.kubernetes.io/version: v0.0.1-v1alpha1
+spec:
+  replicas: 1
+  selector:
+    matchLabels: *default-labels
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels: *default-labels
+    spec:
+      serviceAccountName: Empty_Folder
+      containers:
+      - name: Empty_Folder
+        image: Empty_Folder/Empty_Folder:latest
+        env:
+        - name: CRD
+          value: "true"
+        imagePullPolicy: IfNotPresent
+

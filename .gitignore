@@ -1,0 +1,59 @@
+# Maven / Java
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Maven wrapper and local repos
+.mvn/wrapper/maven-wrapper.jar
+.mvn/repository/
+
+# Temporary files
+tmp/
+*.tmp
+*.swp
+
+# Node/npm
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Ignore built archives
+dist/
+
+# IDE/test reports
+test-output/
+coverage/
+
+# keep user-specific files out
+*.keystore
+
+# keep operator images etc out just in case
+docker-image.tar
+
+# keep sensitive files out
+.env
+secrets.properties
+
+# keep target folders in nested modules out
+**/target/
